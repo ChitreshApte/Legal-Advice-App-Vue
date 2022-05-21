@@ -113,16 +113,17 @@ export default {
   },
   methods: {
     handleRegister(user) {
-      user.role = ["user"];
       this.message = "";
       this.successful = false;
       this.loading = true;
 
-      this.$store.dispatch("auth/register", user).then(
+      this.$store.dispatch("auth/registerUser", user).then(
         (data) => {
           this.message = data.message;
           this.successful = true;
           this.loading = false;
+          //updating the store, this is for common user of the website
+          this.$store.dispatch("user/updateUsers");
         },
         (error) => {
           this.message =

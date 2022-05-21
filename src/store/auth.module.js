@@ -29,8 +29,20 @@ export const auth = {
       AuthService.logout();
       commit("logout");
     },
-    register({ commit }, user) {
-      return AuthService.register(user).then(
+    registerUser({ commit }, user) {
+      return AuthService.registerUser(user).then(
+        (response) => {
+          commit("registerSuccess");
+          return Promise.resolve(response.data);
+        },
+        (error) => {
+          commit("registerFailure");
+          return Promise.reject(error);
+        }
+      );
+    },
+    registerExpert({ commit }, expert) {
+      return AuthService.registerExpert(expert).then(
         (response) => {
           commit("registerSuccess");
           return Promise.resolve(response.data);

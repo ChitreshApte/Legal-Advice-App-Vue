@@ -1,8 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <router-link class="navbar-brand nav-link" :to="{ name: 'Home' }"
-        >Legal Advice</router-link
+      <router-link class="navbar-brand nav-link" :to="{ name: 'Home' }">
+        <img class="brand-logo" src="../src/assets/LA.png" />
+        Legal Advice</router-link
       >
       <button
         class="navbar-toggler"
@@ -64,6 +65,38 @@
     </div>
   </nav>
   <router-view />
+  <footer>
+    <div class="row">
+      <div class="col span-1-of-2">
+        <ul class="footer-nav">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">iOS App</a></li>
+          <li><a href="#">Android App</a></li>
+        </ul>
+      </div>
+      <div class="col span-1-of-2">
+        <ul class="social-links">
+          <li>
+            <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+          </li>
+          <li>
+            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+          </li>
+          <li>
+            <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+          </li>
+          <li>
+            <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <p>Copyright &copy; 2022 by Chitresh Apte</p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -96,6 +129,9 @@ export default {
   mounted() {
     //this will update the list of legal experts that we have
     this.$store.dispatch("user/updateLegalExperts");
+    this.$store.dispatch("user/updateUsers");
+    this.$store.dispatch("messages/updateMessages");
+    this.$store.dispatch("queries/updateQueries");
     // for (const key in this.$store.state.user) {
     //   console.log(`${key}: ${this.$store.state.user[key]}`);
     // }
@@ -109,5 +145,101 @@ export default {
 }
 #logOutLink {
   cursor: pointer;
+}
+.brand-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+footer {
+  background-color: #333;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+footer .row {
+  margin: 0;
+}
+
+.footer-nav {
+  list-style: none;
+  padding: 50px 0 80px 0;
+  margin-left: 20px;
+  float: left;
+}
+
+.social-links {
+  list-style: none;
+  padding: 50px 0 80px 0;
+  margin-right: 20px;
+  float: right;
+}
+
+.footer-nav li,
+.social-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-nav li:last-child,
+.social-links li::last-child {
+  margin-right: 0;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited {
+  text-decoration: none;
+  border: 0;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active {
+  color: #ddd;
+}
+
+.social-links li a:link,
+.social-links li a:visited {
+  text-decoration: none;
+  border: 0;
+  color: #888;
+  transition: color 0.2s;
+  font-size: 150%;
+}
+
+ion-icon[name="logo-facebook"],
+ion-icon[name="logo-twitter"],
+ion-icon[name="logo-google"],
+ion-icon[name="logo-instagram"] {
+  transition: color 0.2s;
+}
+
+ion-icon[name="logo-facebook"]:hover,
+ion-icon[name="logo-facebook"]:active {
+  color: #1877f2;
+}
+
+ion-icon[name="logo-twitter"]:hover,
+ion-icon[name="logo-twitter"]:active {
+  color: #1da1f2;
+}
+
+ion-icon[name="logo-google"]:hover,
+ion-icon[name="logo-google"]:active {
+  color: #ea4335;
+}
+
+ion-icon[name="logo-instagram"]:hover,
+ion-icon[name="logo-instagram"]:active {
+  color: #c32aa3;
+}
+
+footer p {
+  color: #888;
+  margin-top: 30px;
+  padding-bottom: 5px;
+  text-align: center;
 }
 </style>

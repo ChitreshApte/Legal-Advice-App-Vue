@@ -22,15 +22,33 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(user) {
-    return axios.post(API_URL + "signup", {
+  registerUser(user) {
+    return axios.post(API_URL + "signupUser", {
       username: user.username,
       email: user.email,
       password: user.password,
-      role: user.role,
       phoneNumber: user.phoneNumber,
       profession: user.profession,
       description: user.description,
+    });
+  }
+  registerExpert(expert) {
+    return axios.post(API_URL + "signupExpert", {
+      username: expert.username,
+      email: expert.email,
+      password: expert.password,
+      phoneNumber: expert.phoneNumber,
+      profession: expert.profession,
+      description: expert.description,
+      domainSpecialization: expert.domainSpecialization,
+      city: expert.city,
+      state: expert.state,
+      country: expert.country,
+      experience: expert.experience,
+      clientProblems: expert.clientProblems,
+      targetClients: expert.targetClients,
+      tagline: expert.tagline,
+      keywords: expert.keywords,
     });
   }
 }

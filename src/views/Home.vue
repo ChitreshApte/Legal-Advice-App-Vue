@@ -8,25 +8,47 @@
       </button>
     </div>
   </div>
-  <div v-if="$store.state.user.legalExperts">
+  <div v-if="allLegalExperts">
     <h3 class="listHeading">Our Experts</h3>
   </div>
   <div class="container wrapper">
     <ProfileCard
       class="experProfile"
-      v-for="expert in $store.state.user.legalExperts"
+      v-for="expert in allLegalExperts"
       :key="expert.id"
       :user="expert"
+    />
+  </div>
+  <div v-if="allQueries">
+    <h3 class="listHeading">Queries</h3>
+  </div>
+  <div class="container wrapper">
+    <QueryCard
+      class="queryProfile"
+      v-for="query in allQueries"
+      :key="query.id"
+      :query="query"
     />
   </div>
 </template>
 
 <script>
 import ProfileCard from "../components/ProfileCard.vue";
+import QueryCard from "../components/QueryCard.vue";
+
 export default {
   name: "Home",
   components: {
     ProfileCard,
+    QueryCard,
+  },
+  computed: {
+    allQueries() {
+      return this.$store.state.queries.queries;
+    },
+    allLegalExperts() {
+      return this.$store.state.user.legalExperts;
+    },
   },
 };
 </script>

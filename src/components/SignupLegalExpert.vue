@@ -3,29 +3,84 @@
     <h2><center v-pre>Hello Expert!</center></h2>
     <Form @submit="handleRegister" :validation-schema="schema">
       <div v-if="!successful">
+        <!-- NAME -->
         <div class="form-group">
           <label for="username">Username</label>
           <Field name="username" type="text" class="form-control" />
         </div>
+        <!-- EMAIL -->
         <div class="form-group">
           <label for="email">Email</label>
           <Field name="email" type="email" class="form-control" />
         </div>
+        <!-- PASSWORD -->
         <div class="form-group">
           <label for="password">Password</label>
           <Field name="password" type="password" class="form-control" />
         </div>
+        <!-- PHONE NUMBER -->
         <div class="form-group">
           <label for="phoneNumber">Phone Number</label>
           <Field name="phoneNumber" type="text" class="form-control" />
         </div>
+        <!-- PROFESSION -->
         <div class="form-group">
           <label for="profession">Profession</label>
           <Field name="profession" type="text" class="form-control" />
         </div>
+        <!-- DESCRIPTION -->
         <div class="form-group">
           <label for="description">Description</label>
           <Field name="description" type="textarea" class="form-control" />
+        </div>
+        <!-- DOMAIN SPECIALIZATION -->
+        <div class="form-group">
+          <label for="domainSpecialization">Domain Specialization</label>
+          <Field
+            name="domainSpecialization"
+            type="textarea"
+            class="form-control"
+          />
+        </div>
+        <!-- CITY -->
+        <div class="form-group">
+          <label for="city">City</label>
+          <Field name="city" type="textarea" class="form-control" />
+        </div>
+        <!-- STATE -->
+        <div class="form-group">
+          <label for="state">State</label>
+          <Field name="state" type="textarea" class="form-control" />
+        </div>
+        <!-- COUNTRY -->
+        <div class="form-group">
+          <label for="country">Country</label>
+          <Field name="country" type="textarea" class="form-control" />
+        </div>
+        <!-- EXPERIENCE -->
+        <div class="form-group">
+          <label for="experience">Experience</label>
+          <Field name="experience" type="textarea" class="form-control" />
+        </div>
+        <!-- CLIENT PROBLEMS -->
+        <div class="form-group">
+          <label for="clientProblems">Client Problems</label>
+          <Field name="clientProblems" type="textarea" class="form-control" />
+        </div>
+        <!-- TARGET CLIENTS -->
+        <div class="form-group">
+          <label for="targetClients">Target Clients</label>
+          <Field name="targetClients" type="textarea" class="form-control" />
+        </div>
+        <!-- TAGLINE -->
+        <div class="form-group">
+          <label for="tagline">Tagline</label>
+          <Field name="tagline" type="textarea" class="form-control" />
+        </div>
+        <!-- KEYWORDS -->
+        <div class="form-group">
+          <label for="keywords">Keywords</label>
+          <Field name="keywords" type="textarea" class="form-control" />
         </div>
         <br />
         <ul class="error-box">
@@ -35,6 +90,19 @@
           <ErrorMessage as="p" name="phoneNumber" class="error-feedback" />
           <ErrorMessage as="p" name="profession" class="error-feedback" />
           <ErrorMessage as="p" name="description" class="error-feedback" />
+          <ErrorMessage
+            as="p"
+            name="domainSpecialization"
+            class="error-feedback"
+          />
+          <ErrorMessage as="p" name="city" class="error-feedback" />
+          <ErrorMessage as="p" name="state" class="error-feedback" />
+          <ErrorMessage as="p" name="country" class="error-feedback" />
+          <ErrorMessage as="p" name="experience" class="error-feedback" />
+          <ErrorMessage as="p" name="clientProblems" class="error-feedback" />
+          <ErrorMessage as="p" name="targetClients" class="error-feedback" />
+          <ErrorMessage as="p" name="tagline" class="error-feedback" />
+          <ErrorMessage as="p" name="keywords" class="error-feedback" />
         </ul>
         <div class="form-group">
           <button class="btn btn-primary btn-block" :disabled="loading">
@@ -92,6 +160,26 @@ export default {
       phoneNumber: yup.string().required("Phone Number is required!"),
       profession: yup.string().required("Profession is required!"),
       description: yup.string().required("Description is required!"),
+      domainSpecialization: yup
+        .string()
+        .required("Domain Specialization is required!"),
+      city: yup.string().required("City is required!"),
+      state: yup.string().required("State is required!"),
+      country: yup.string().required("Country is required!"),
+      experience: yup
+        .string()
+        .required("Experience is required!")
+        .min(60, "Experience must be at least 60 characters!"),
+      clientProblems: yup
+        .string()
+        .required("Client Problems is required!")
+        .min(60, "Client Problems must be at least 60 characters!"),
+      targetClients: yup
+        .string()
+        .required("Target Clients is required!")
+        .min(60, "Target Clients must be at least 60 characters!"),
+      tagline: yup.string().required("Tagline is required!"),
+      keywords: yup.string().required("Keywords are required!"),
     });
 
     return {
@@ -112,18 +200,23 @@ export default {
     }
   },
   methods: {
-    handleRegister(user) {
-      user.role = ["user", "legalexpert"];
+    handleRegister(expert) {
       this.message = "";
       this.successful = false;
       this.loading = true;
 
-      this.$store.dispatch("auth/register", user).then(
+      //we call the store, mainly an action
+      //and then the action calls the service
+      //then it makes the necessary commit
+      this.$store.dispatch("auth/registerExpert", expert).then(
         (data) => {
           this.message = data.message;
           this.successful = true;
           this.loading = false;
           //new legal expert has been added to the list, update the store data
+          //here I am dispatching an action
+          //that action calls the user service
+          //and then it commits an mutation
           this.$store.dispatch("user/updateLegalExperts");
         },
         (error) => {
