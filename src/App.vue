@@ -79,16 +79,16 @@
       <div class="col span-1-of-2">
         <ul class="social-links">
           <li>
-            <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-facebook" v-pre></ion-icon></a>
           </li>
           <li>
-            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-twitter" v-pre></ion-icon></a>
           </li>
           <li>
-            <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-instagram" v-pre></ion-icon></a>
           </li>
           <li>
-            <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-google" v-pre></ion-icon></a>
           </li>
         </ul>
       </div>

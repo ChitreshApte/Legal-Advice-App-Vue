@@ -71,6 +71,7 @@ export default {
   },
   computed: {
     isUserExpert() {
+      if (!this.currentLoggedUser) return false;
       return this.currentLoggedUser.roles.includes("ROLE_LEGALEXPERT");
     },
     currentQuery() {
